@@ -16,10 +16,11 @@ article {
   color: darkblue;
 }
 img {
+
   width: 150px;
   height: 100px;
   align: center;
-  
+  border-radius: 2px;
 
 }
 
@@ -31,8 +32,6 @@ header, footer {
     text-align: center;
     border-radius: 5px;
 }
-
-
 
 article {
     margin-left: 150px;
@@ -49,6 +48,8 @@ ul {
 li {
     display: inline;
     padding: 20px;
+}
+
 }
 li a:hover {
     background-color: #111;
