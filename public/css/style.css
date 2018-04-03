@@ -1,0 +1,55 @@
+
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: darkblue;
+  text-align: left;
+}
+
+h2 {
+	color: white;
+}
+
+article {
+  color: darkblue;
+}
+img {
+  width: 150px;
+  height: 100px;
+  align: center;
+  
+
+}
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: #009999;
+    clear: left;
+    text-align: center;
+    border-radius: 5px;
+}
+
+
+
+article {
+    margin-left: 150px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+ul {
+    list-style-type: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+li {
+    display: inline;
+    padding: 20px;
+}
+li a:hover {
+    background-color: #111;
+}
