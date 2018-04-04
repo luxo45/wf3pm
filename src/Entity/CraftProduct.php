@@ -1,14 +1,21 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CraftProductRepository")
+ * @UniqueEntity(
+ * fields={"name"},
+ * errorPath="name",
+ * message="This name is already in use"
+ * )
  */
 class CraftProduct
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,6 +25,7 @@ class CraftProduct
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -28,6 +36,10 @@ class CraftProduct
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     * pattern="#^\d+\.\d+\.\d+$#",
+     * message="The version must follow the pattern x.x.x"
+     * )
      */
     private $version;
 
@@ -44,7 +56,7 @@ class CraftProduct
     public function setName(string $name): self
     {
         $this->name = $name;
-
+        
         return $this;
     }
 
@@ -56,7 +68,7 @@ class CraftProduct
     public function setDescription(?string $description): self
     {
         $this->description = $description;
-
+        
         return $this;
     }
 
@@ -68,7 +80,7 @@ class CraftProduct
     public function setVersion(string $version): self
     {
         $this->version = $version;
-
+        
         return $this;
     }
 }

@@ -1,0 +1,20 @@
+{%extends 'base.html.twig' %}
+
+{% block body %}
+
+	{{ form_start(formular) }}{#formular devient une variable#}
+	
+		{{ form_errors(formular.name) }}
+		{{ form_label(formular.name) }}
+		{{ form_widget(formular.name) }}
+		
+		{{ form_row(formular.description) }}
+		
+		{{ form_row(formular.version) }}
+		
+		{{ form_row(formular.submit) }}
+		
+	{{ form_end(formular) }}
+		
+
+{% endblock %}
