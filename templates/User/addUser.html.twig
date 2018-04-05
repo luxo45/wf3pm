@@ -1,0 +1,34 @@
+{%extends 'base.html.twig' %}
+{% block title %}Register
+{% endblock %}
+{% block body %}
+
+	{{ form_start(formular) }}{#formular devient une variable#}
+	
+		{{ form_errors(formular.username) }}
+		{{ form_label(formular.username) }}
+		{{ form_widget(formular.username) }}
+		
+		{{ form_errors(formular.firstname) }}
+		{{ form_label(formular.firstname) }}
+		{{ form_widget(formular.firstname) }}
+		
+		{{ form_errors(formular.lastname) }}
+		{{ form_label(formular.lastname) }}
+		{{ form_widget(formular.lastname) }}
+		
+        {{ form_errors(formular.email) }}
+		{{ form_label(formular.email) }}
+		{{ form_widget(formular.email) }}
+		
+        {{ form_errors(formular.password) }}
+		{{ form_label(formular.password) }}
+		{{ form_widget(formular.password) }}
+		
+		
+        {{ form_row(formular.submit) }}
+		
+	{{ form_end(formular) }}
+		
+
+{% endblock %}

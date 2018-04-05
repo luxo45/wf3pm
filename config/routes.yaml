@@ -5,3 +5,13 @@ homepage:
 add_product:
    path: /add/product
    controller: App\Controller\ProductController::addProduct
+   
+add_user:
+   path: /add/User
+   controller: App\Controller\UserController::addUser
+   
+user_activate:
+   path: /user/activate{token}
+   controller: App\Controller\UserController::activateUser
+   requirements:
+    token: '[a-z0-9-]+'
