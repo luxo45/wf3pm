@@ -1,0 +1,23 @@
+HEADER:
+  HOME: Accueil
+  ADD_PRODUCT: Ajouter un produit
+  REGISTER: S'inscrire
+  LIST_PRODUCT: Liste des produits
+  
+  
+FORM:
+  PRODUCT: 
+    NAME: Nom
+    DESCRIPTION: Description
+    VERSION: Version
+    SUBMIT: Envoyer
+
+USER:
+   NAME: Nom d'utilisateur
+   FIRSTNAME: Prénom
+   LASTNAME: Nom
+   EMAIL: email
+   PASSWORD: Mot de passe
+   REPASS:  Retapez votre mot de passe
+   SUBMIT: Envoyer
+   

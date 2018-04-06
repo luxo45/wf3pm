@@ -1,0 +1,17 @@
+{%extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{  'LIST_PRODUCT.TITLE' | trans }} {% endblock %}
+
+{% block body %}
+
+
+	<article>
+    {% for value in products %}
+    
+        <div> {{ value.getName() }}</div>
+      
+	{% endfor %}            
+    </article>
+    
+    
+{% endblock %}

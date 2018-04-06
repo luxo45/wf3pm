@@ -18,7 +18,19 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
-
+    public function usernameExist(string $username){
+        
+        $queryBuilder = $this->createQueryBuilder('u');
+        //je veux selectionner le nombre d'id dans result
+        $queryBuilder->select('COUNT(u) AS count')
+            ->where('u.username = :username')
+            ->setParameter('username', $username);
+        
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+        
+        return boolval($result['count']);
+    }
+}
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
@@ -47,4 +59,4 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
-}
+

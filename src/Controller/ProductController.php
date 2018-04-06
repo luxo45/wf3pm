@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Tests\RequestContentProxy;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\CraftProductRepository;
+
 
 class ProductController
 {
@@ -22,10 +24,18 @@ class ProductController
     {
         $product = new CraftProduct();
         $builder = $factory->createBuilder(FormType::class, $product); // create a builder to create a form
-        $builder->add('name', TextType::class)
-            ->add('description', TextareaType::class)
-            ->add('version', TextType::class)
-            ->add('submit', SubmitType::class);
+        $builder->add('name', TextType::class,
+                      ['required' => FALSE, 
+                      'label'=> 'FORM.PRODUCT.NAME',])          
+                ->add('description', TextareaType::class,
+                      ['required' => FALSE, 
+                   'label'=> 'FORM.PRODUCT.DESCRIPTION',])
+                ->add('version', TextType::class,
+                ['required' => FALSE,
+                    'label'=> 'FORM.PRODUCT.VERSION',])    
+                    ->add('submit', SubmitType::class,[
+                        'label'=>'FORM.PRODUCT.SUBMIT']
+                );
         
         $form = $builder->getForm();
         
@@ -44,4 +54,17 @@ class ProductController
             'formular' => $form->createView()
         ]));
     }
+    public function listProduct (Environment $twig, CraftProductRepository $repository)
+    
+    {
+        return new Response(
+            $twig->render(
+                'Product\listProduct.html.twig',
+                ['products'=> $repository->findAll()]
+                )
+            );
+    }
 }
+
+    
+
