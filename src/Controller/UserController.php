@@ -22,6 +22,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\Repository\RoleRepository;
 
 class UserController
 {
@@ -33,7 +36,9 @@ class UserController
         ObjectManager $manager,
         SessionInterface $session,
         UrlGeneratorInterface $urlGenerator,
-        \Swift_Mailer $mailer
+        \Swift_Mailer $mailer,
+        EncoderFactoryInterface $encoderFactory,
+        RoleRepository $roleRepository
     ) {
         $user = new User();
         
@@ -72,6 +77,20 @@ class UserController
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $salt =  md5($user->getUsername());
+            $user->setSalt($salt);
+            
+            $encoder = $encoderFactory->getEncoder(User::class);
+            $password = $encoder->encodePassword(
+                $user->getPassword(),
+                $salt
+            );
+            
+            $user->setPassword($password);
+            
+            $user->addRole($roleRepository->findOneByLabel('ROLE_USER'));
+            
             $manager->persist($user);
             $manager->flush();
             
@@ -104,7 +123,8 @@ class UserController
         $token, 
         ObjectManager $manager, 
         UrlGeneratorInterface $urlGenerator, 
-        SessionInterface $session
+        SessionInterface $session,
+        RoleRepository $roleRepository
     ) {
         
         $userRepository = $manager->getRepository(User::class);
@@ -116,6 +136,8 @@ class UserController
         }
         $user->setActive(true)
              ->setEmailToken(null);
+        
+        $user->addRole($roleRepository->findOneByLabel('ROLE_ACTIVE'));
         
         $manager->flush();
         $session->getFlashBag()->add('info', 'your email is validated');
@@ -138,7 +160,31 @@ class UserController
             ]
             );
     }
+    
+    public function login
+        (
+        AuthenticationUtils $authutils, 
+        Environment $twig
+        )
+        
+   {
+  
+        return new response (
+            $twig->render(
+                'Security/login.html.twig',
+                [
+                    'last_username'=> $authutils->getLastUsername(),
+                    'error'=> $authutils->getLastAuthenticationError()
+                ]
+                
+            )
+        ); 
+        
+    }
+        
 }
+
+
 
 
 

@@ -1,15 +1,20 @@
 <?php
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Twig\Environment;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
 
     /**
@@ -62,9 +67,20 @@ class User
      */
     private $emailToken;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role")
+     */
+    private $roles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $salt;
+
     public function __construct()
     {
         $this->setEmailToken(Uuid::uuid1());
+        $this->roles = new ArrayCollection();
     }
 
     public function getId()
@@ -155,4 +171,55 @@ class User
         
         return $this;
     }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getRoles(): array
+    {
+        $strings=[];
+        foreach ($this->role as $role){
+            $strings[] = $role->getLabel();
+        }
+        return $strings;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->roles->contains($role)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        if ($this->roles->contains($role)) {
+            $this->roles->removeElement($role);
+        }
+
+        return $this;
+    }
+
+    public function getSalt(): ?string
+    {
+        return $this->salt;
+    }
+
+    public function setSalt(string $salt): self
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+    public function eraseCredential()
+    {
+        return;
+    }
+    public function eraseCredentials()
+    {}
+
+    
+    
 }

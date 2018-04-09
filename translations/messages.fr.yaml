@@ -3,6 +3,12 @@ HEADER:
   ADD_PRODUCT: Ajouter un produit
   REGISTER: S'inscrire
   LIST_PRODUCT: Liste des produits
+  LOGOUT: Déconnexion
+  LOGIN: Connexion
+  USERNAME: Nom
+  LANG: 
+    EN: anglais
+    FR: français
   
   
 FORM:

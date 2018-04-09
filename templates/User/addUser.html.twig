@@ -29,6 +29,14 @@
         {{ form_row(formular.submit) }}
 		
 	{{ form_end(formular) }}
+
 		
+
+{% endblock %}
+	
+{% block javascript %}
+
+{{ parent() }}
+<script src="/js/register.js" type="text/javascript"></script>
 
 {% endblock %}

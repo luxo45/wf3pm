@@ -1,22 +1,26 @@
 HEADER:
-  HOME: Home
-  ADD_PRODUCT: Add Product
-  REGISTER: Register
-  LIST_PRODUCT: Product List
+    HOME: Home
+    ADD_PRODUCT: Add Product
+    REGISTER: Register
+    LIST_PRODUCT: Product List
+    LOGOUT: Logout
+    LOGIN: Login
+    LANG: 
+      EN: English
+      FR: French
   
 FORM:
-  PRODUCT: 
-   NAME: Name
-   DESCRIPTION: Description
-   VERSION: Version
-   SUBMIT: Submit
-   
-USER:
-  NAME: Name
-  FIRSTNAME: Firstname
-  LASTNAME: Lastname
-  EMAIL: email
-  PASSWORD: Password
-  REPASS:  Password2
-  SUBMIT: Submit
+    PRODUCT: 
+        NAME: Name
+        DESCRIPTION: Description
+        VERSION: Version
+        SUBMIT: Submit
+    USER:
+        NAME: Name
+        FIRSTNAME: Firstname
+        LASTNAME: Lastname
+        EMAIL: email
+        PASSWORD: Password
+        REPASS:  Password2
+        SUBMIT: Submit
    

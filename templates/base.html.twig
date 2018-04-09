@@ -6,6 +6,7 @@
         {% block stylesheets %}<link rel=stylesheet href='/css/style.css'>{% endblock %}
         
     </head>
+
     <body>
         {%include 'header.html.twig'%}
         {% block body %}
@@ -13,6 +14,12 @@
         {% endblock %}
         {%include 'footer.html.twig'%}
         
-        {% block javascripts %}{% endblock %}
+        {% block javascript %}
+        <script
+  		src="https://code.jquery.com/jquery-3.3.1.js"
+  		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  		crossorigin="anonymous"></script>
+        
+        {% endblock %}
     </body>
 </html>

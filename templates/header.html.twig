@@ -3,12 +3,20 @@
 <ul>
   <li><a href="{{path('homepage')}}">{{('HEADER.HOME'|trans)}}
   </a></li>
+  
+  {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+  <li><a href="{{path('logout')}}">{{('HEADER.LOGOUT'|trans)}}
+  {% else %}
+  <li><a href="{{path('login')}}">{{('HEADER.LOGIN'|trans)}}
   <li><a href="{{path('add_user')}}">{{('HEADER.REGISTER'|trans)}}</a></li>
+  {% endif %}
+  {% if is_granted('ROLE_ACTIVE')%}
   <li><a href="{{path('add_product')}}">{{('HEADER.ADD_PRODUCT'|trans)}}</a></li>
+  {% endif %}
   <li><a href="{{path('list_product')}}">{{('HEADER.LIST_PRODUCT'|trans)}}</a></li>
 </ul>
 
-   <img src="../img/logo.png">
+   <img src="/img/logo.png">
    
 </header>
 
