@@ -13,6 +13,15 @@ add_product:
       _locale: en
   requirements:
       _locale: 'en|fr'
+      
+product:
+    path: /{_locale}/product/{product}
+    controller: App\Controller\ProductController::displayProduct
+    defaults:
+        _locale: en
+    requirements:
+        _locale: 'en|fr'
+        product: '^[0-9]+$'      
    
 add_user:
   path: /{_locale}/add/User

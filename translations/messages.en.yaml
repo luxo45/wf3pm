@@ -23,4 +23,6 @@ FORM:
         PASSWORD: Password
         REPASS:  Password2
         SUBMIT: Submit
-   
+
+DOWNLOAD: download
+ 
